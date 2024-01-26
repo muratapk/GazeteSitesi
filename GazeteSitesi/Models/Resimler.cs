@@ -8,6 +8,6 @@ namespace GazeteSitesi.Models
         public int ResimId { get; set; }
         public string ResimAd { get; set; } = string.Empty;
 
-        public virtual ICollection<Haberler>? Haberlers { get;set; }
+        public virtual List<Haberler>? Haberlers { get;set; }
     }
 }

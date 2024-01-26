@@ -7,7 +7,7 @@ namespace GazeteSitesi.Models
         [Key]
         public int KonumId { get; set; }
         public string KonumAdi { get; set; } = string.Empty;
-        public virtual ICollection<Haberler>?Haberlers { get; set; }
-        public virtual ICollection<Reklamlar>? Reklamlars { get; set; }
+        public virtual List<Haberler>?Haberlers { get; set; }
+        public virtual List<Reklamlar>? Reklamlars { get; set; }
     }
 }

@@ -7,6 +7,6 @@ namespace GazeteSitesi.Models
         [Key]
         public int YetkiId { get; set; }
         public string YetkiAdi { get; set; } = string.Empty;
-        public virtual ICollection<Kullanicilar>? Kullanicilars { get; set; }
+        public virtual List<Kullanicilar>? Kullanicilars { get; set; }
     }
 }

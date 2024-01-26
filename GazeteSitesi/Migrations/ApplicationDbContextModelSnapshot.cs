@@ -100,36 +100,24 @@ namespace GazeteSitesi.Migrations
                     b.Property<int>("KategoriId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("KategorilerKategoriId")
-                        .HasColumnType("int");
-
                     b.Property<int>("KonumId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("KonumlarKonumId")
                         .HasColumnType("int");
 
                     b.Property<int>("ResimId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ResimlerResimId")
-                        .HasColumnType("int");
-
                     b.Property<int>("YazarId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("YazarlarYazarId")
                         .HasColumnType("int");
 
                     b.HasKey("HaberId");
 
-                    b.HasIndex("KategorilerKategoriId");
+                    b.HasIndex("KategoriId");
 
-                    b.HasIndex("KonumlarKonumId");
+                    b.HasIndex("KonumId");
 
-                    b.HasIndex("ResimlerResimId");
+                    b.HasIndex("ResimId");
 
-                    b.HasIndex("YazarlarYazarId");
+                    b.HasIndex("YazarId");
 
                     b.ToTable("haberlers");
                 });
@@ -180,15 +168,16 @@ namespace GazeteSitesi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("YetkiId")
-                        .HasColumnType("int");
+                    b.Property<string>("KullaniciSifre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("YetkilerYetkiId")
+                    b.Property<int?>("YetkiId")
                         .HasColumnType("int");
 
                     b.HasKey("KullaniciId");
 
-                    b.HasIndex("YetkilerYetkiId");
+                    b.HasIndex("YetkiId");
 
                     b.ToTable("Kullanicilars");
                 });
@@ -296,9 +285,6 @@ namespace GazeteSitesi.Migrations
                     b.Property<int>("HaberId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("HaberlerHaberId")
-                        .HasColumnType("int");
-
                     b.Property<string>("YorumAd")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -309,7 +295,7 @@ namespace GazeteSitesi.Migrations
 
                     b.HasKey("YorumId");
 
-                    b.HasIndex("HaberlerHaberId");
+                    b.HasIndex("HaberId");
 
                     b.ToTable("Yorumlars");
                 });
@@ -318,19 +304,27 @@ namespace GazeteSitesi.Migrations
                 {
                     b.HasOne("GazeteSitesi.Models.Kategoriler", "Kategoriler")
                         .WithMany("Haberlers")
-                        .HasForeignKey("KategorilerKategoriId");
+                        .HasForeignKey("KategoriId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("GazeteSitesi.Models.Konumlar", "Konumlar")
                         .WithMany("Haberlers")
-                        .HasForeignKey("KonumlarKonumId");
+                        .HasForeignKey("KonumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("GazeteSitesi.Models.Resimler", "Resimler")
                         .WithMany("Haberlers")
-                        .HasForeignKey("ResimlerResimId");
+                        .HasForeignKey("ResimId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("GazeteSitesi.Models.Yazarlar", "Yazarlar")
                         .WithMany("Haberlers")
-                        .HasForeignKey("YazarlarYazarId");
+                        .HasForeignKey("YazarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Kategoriler");
 
@@ -345,7 +339,7 @@ namespace GazeteSitesi.Migrations
                 {
                     b.HasOne("GazeteSitesi.Models.Yetkiler", "Yetkiler")
                         .WithMany("Kullanicilars")
-                        .HasForeignKey("YetkilerYetkiId");
+                        .HasForeignKey("YetkiId");
 
                     b.Navigation("Yetkiler");
                 });
@@ -363,7 +357,9 @@ namespace GazeteSitesi.Migrations
                 {
                     b.HasOne("GazeteSitesi.Models.Haberler", "Haberler")
                         .WithMany("Yorumlars")
-                        .HasForeignKey("HaberlerHaberId");
+                        .HasForeignKey("HaberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Haberler");
                 });

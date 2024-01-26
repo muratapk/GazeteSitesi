@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GazeteSitesi.Models
 {
@@ -7,7 +8,10 @@ namespace GazeteSitesi.Models
 		[Key]
         public int KullaniciId { get; set; }
         public string KullaniciAdi { get; set; }
-        public int YetkiId { get; set; }
-        public virtual Yetkiler? Yetkiler { get; set; }
+        public string KullaniciSifre { get; set; }
+
+        [ForeignKey("Yetkiler")]
+        public int ? YetkiId { get; set; }
+        public virtual Yetkiler ? Yetkiler { get; set; }
     }
 }

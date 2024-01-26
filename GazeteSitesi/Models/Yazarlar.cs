@@ -10,6 +10,6 @@ namespace GazeteSitesi.Models
         public string YazarResim { get; set; } = string.Empty;
         public string YazarEmail { get; set; } = string.Empty;
         public string YazarSifre { get; set; } = string.Empty;
-		public virtual ICollection<Haberler>? Haberlers { get; set; }
+		public virtual List<Haberler>? Haberlers { get; set; }
 	}
 }
